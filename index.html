@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Base64AudioPlayer Demonstration</title>
+    <style>
+      html,
+      body {
+        background: #fafafa;
+        color: #333;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Base64AudioPlayer Demonstration</h1>
+    <p>
+      This is a demonstration of the Base64AudioPlayer library. It allows you to
+      play audio tracks encoded as Base64 strings. Open the developer tools
+      console for player information.
+    </p>
+    <div id="loadingIndicator">Loading audio track...</div>
+    <div id="controls" style="display: none">
+      <button id="playButton">Play/Pause</button>
+      <span id="timeDisplay"></span>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/Base64AudioPlayer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/ncs/test1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/ncs/DreadPitt_Pyro.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/ncs/ElectroLight_Symbolism.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/ncs/Electronomia_Limitless.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/ncs/Elektronomia_SkyHigh.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/ncs/Fareoh_UnderWater.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/songs/Drill_1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/EldiiarBekbolotov/Base64AudioPlayer/songs/Pop_1.js"></script>
+    <script>
+      var audioArray = [
+        Base64AudioPlayer_Drill_1,
+        Base64AudioPlayer_Pop_1,
+        Base64AudioPlayerNCSTest1,
+        Base64AudioPlayer_DreadPitt_Pyro,
+        Base64AudioPlayer_ElectroLight_Symbolism,
+        Base64AudioPlayer_Elektronomia_Limitless,
+        Base64AudioPlayer_Elektronomia_SkyHigh,
+        Base64AudioPlayer_Fareoh_UnderWater,
+      ];
+
+      var player = new Base64AudioPlayer(audioArray, {
+        loopMode: "track",
+        onTimeUpdate: function (currentTime, duration) {
+          document.getElementById("timeDisplay").textContent =
+            "Time: " + currentTime.toFixed(2) + " / " + duration.toFixed(2);
+        },
+        onTrackLoad: function (index, duration) {
+          var loadingElem = document.getElementById("loadingIndicator");
+          loadingElem.textContent =
+            "Track loaded. Duration: " + duration.toFixed(2) + " seconds.";
+          document.getElementById("controls").style.display = "block";
+        },
+        onTrackEnd: function (index) {
+          console.log("Track " + index + " ended.");
+        },
+      });
+
+      document.getElementById("playButton").onclick = function () {
+        player.togglePlayPause();
+      };
+    </script>
+  </body>
+</html>
