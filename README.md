@@ -1,6 +1,8 @@
 # Base64AudioPlayer
 Base64AudioPlayer.js
 
+v1
+
 First released for the Khan Academy Computer Programming Community.
 View on jsDelivr: https://www.jsdelivr.com/package/gh/EldiiarBekbolotov/Base64AudioPlayer
 
